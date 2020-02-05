@@ -51,6 +51,17 @@ public class LocaleLanguageAPI {
     }
     
     /**
+     * 转换本地化字符串
+     * @param str 本地化字符串
+     * @return 转换后字符串
+     */
+    public static String get(String str){
+        if(main.NEW!=null && main.NEW.containsKey(str))return main.NEW.get(str); 
+        if(main.OLD!=null && main.OLD.containsKey(str))return main.OLD.get(str);
+        return str;
+    }
+    
+    /**
      * 获取物品名
      * @param is 物品
      * @return 物品名

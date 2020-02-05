@@ -49,6 +49,7 @@ public class Main extends JavaPlugin {
                 List<String> l = Arrays.asList(f.list((File dir, String file) -> file.endsWith(".lang")));
                 if(!l.isEmpty()){
                     Map<String,String> New = LangLang.read(l);
+                    NEW = New.isEmpty()?null:New;
                     if(!New.isEmpty()){
                         try {
                             Class <?>clazzI18n = Class.forName("net.minecraft.server."+VERSION+".LocaleI18n");
@@ -71,6 +72,13 @@ public class Main extends JavaPlugin {
                 if(!l.isEmpty()){
                     Map<String,String> New = LangJson.read(l);
                     NEW = New.isEmpty()?null:New;
+                    try {
+                        Class <?>clazzLL = Class.forName("net.minecraft.server."+VERSION+".LocaleLanguage");
+                        Object ll = clazzLL.newInstance();
+                        Field nameField = ll.getClass().getDeclaredField("d");
+                        nameField.setAccessible(true);
+                        if(OLD==null) OLD = (Map)nameField.get(ll);
+                    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchFieldException | SecurityException ex) {}
                 }
             }
         }else{
@@ -92,6 +100,7 @@ public class Main extends JavaPlugin {
     
     public void unload(){
         if(mode<1.13){
+            NEW = null;
             try {
                 if(OLD!=null){
                     Class <?>clazzI18n = Class.forName("net.minecraft.server."+VERSION+".LocaleI18n");
@@ -109,6 +118,7 @@ public class Main extends JavaPlugin {
             }catch (IllegalAccessException | IllegalArgumentException | NoSuchFieldException | SecurityException | ClassNotFoundException ex) {}
         }else{
             NEW = null;
+            OLD = null;
         }
     }
     
