@@ -1,0 +1,4 @@
+#是否启用自定义语言文件
+enable: false
+#重载信息
+reload: '§a[%name%]: OK!'

@@ -1,0 +1,14 @@
+name: LocaleLanguageAPI
+main: com.tripleying.qwq.LocaleLanguageAPI.Main
+version: 1.0.0
+description: LocaleLanguageAPI
+author: Dogend
+website: http://qwq.tripleying.com/plugins/localelanguageapi
+prefix: LocaleLanguageAPI
+commands:
+  localang:
+    description: reload plugin
+    aliases: ll
+    usage: |
+      /ll reload
+      /localang reload
